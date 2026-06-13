@@ -19,14 +19,14 @@ export const navGroups = [
     icon: FiFolder,
     children: [
       { label: 'All Documents', path: '/documents', icon: FiFileText },
-      { label: 'Aadhaar', path: '/documents/aadhaar', icon: FiFileText },
-      { label: 'PAN', path: '/documents/pan', icon: FiFileText },
-      { label: 'Passport', path: '/documents/passport', icon: FiFileText },
-      {
-        label: 'Driving License',
-        path: '/documents/driving-license',
-        icon: FiFileText,
-      },
+      // { label: 'Aadhaar', path: '/documents/aadhaar', icon: FiFileText },
+      // { label: 'PAN', path: '/documents/pan', icon: FiFileText },
+      // { label: 'Passport', path: '/documents/passport', icon: FiFileText },
+      // {
+      //   label: 'Driving License',
+      //   path: '/documents/driving-license',
+      //   icon: FiFileText,
+      // },
     ],
   },
   {
@@ -36,6 +36,8 @@ export const navGroups = [
       { label: 'Father', path: '/family/father', icon: FiUser },
       { label: 'Mother', path: '/family/mother', icon: FiUser },
       { label: 'Sister', path: '/family/sister', icon: FiUser },
+      { label: 'Me', path: '/family/Me', icon: FiUser },
+
     ],
   },
   {
@@ -43,6 +45,8 @@ export const navGroups = [
     icon: FiDollarSign,
     children: [
       { label: 'Payslips', path: '/finance/payslips', icon: FiCreditCard },
+      { label: 'GPFslips', path: '/finance/GPFslips', icon: FiCreditCard },
+
       {
         label: 'Bank Statements',
         path: '/finance/bank-statements',

@@ -11,9 +11,10 @@ import {
   LinearProgress,
   Alert,
 } from '@mui/material'
-import { FiUploadCloud } from 'react-icons/fi'
+import { FiUploadCloud, FiCamera } from 'react-icons/fi'
 import { uploadDocument } from '../../services/documents'
 import { auth } from '../../services/firebase'
+import {  useRef } from 'react'
 
 function formatSize(bytes) {
   if (!bytes) return ''
@@ -29,9 +30,10 @@ function UploadDialog({ open, onClose, category, categoryLabel }) {
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
   const [titleTouched, setTitleTouched] = useState(false)
+  const [qrOpen, setQrOpen] =useState(false)
 
   const titleError = titleTouched && !title.trim()
-
+const cameraInputRef = useRef(null)
   const reset = () => {
     setFile(null)
     setTitle('')
@@ -103,23 +105,60 @@ function UploadDialog({ open, onClose, category, categoryLabel }) {
             {error}
           </Alert>
         )}
+<Box
+  sx={{
+    display: 'flex',
+    gap: 2,
+    mb: 2,
+  }}
+>
+  <Button
+    component="label"
+    variant="outlined"
+    fullWidth
+    startIcon={<FiUploadCloud />}
+    disabled={uploading}
+    sx={{
+      py: 2,
+      borderStyle: 'dashed',
+      textTransform: 'none',
+    }}
+  >
+    Upload File
 
-        <Button
-          component="label"
-          variant="outlined"
-          fullWidth
-          startIcon={<FiUploadCloud />}
-          disabled={uploading}
-          sx={{
-            py: 2,
-            borderStyle: 'dashed',
-            textTransform: 'none',
-            mb: 2,
-          }}
-        >
-          {file ? 'Choose a different file' : 'Choose file'}
-          <input type="file" hidden onChange={handleFileChange} />
-        </Button>
+    <input
+      type="file"
+      hidden
+      accept="image/*,.pdf"
+      onChange={handleFileChange}
+    />
+  </Button>
+
+  <Button
+    variant="outlined"
+    fullWidth
+    startIcon={<FiCamera />}
+    disabled={uploading}
+    onClick={() => cameraInputRef.current?.click()}
+    sx={{
+      py: 2,
+      borderStyle: 'dashed',
+      textTransform: 'none',
+    }}
+  >
+    Capture
+
+    <input
+      ref={cameraInputRef}
+      hidden
+      type="file"
+      accept="image/*"
+      capture="environment"
+      onChange={handleFileChange}
+    />
+  </Button>
+
+</Box>
 
         {file && (
           <Box

@@ -8,6 +8,7 @@ import {
 import UploadDialog from '../../components/UploadDialog/UploadDialog'
 import DocumentCard from '../../components/DocumentCard/DocumentCard'
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog'
+import { Box, CircularProgress, Typography } from '@mui/material'
 
 function Dashboard() {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -60,7 +61,21 @@ function Dashboard() {
         <h3 className="recent-title">Recent Documents</h3>
 
         {loading ? (
-          <p className="recent-empty">Loading documents…</p>
+         <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      py: 6,
+      gap: 2,
+    }}
+  >
+    <CircularProgress size={50} />
+    <Typography variant="body2" color="text.secondary">
+      Loading documents...
+    </Typography>
+  </Box>
         ) : documents.length === 0 ? (
           <p className="recent-empty">
             No documents yet. Click “Upload document” to add your first one.

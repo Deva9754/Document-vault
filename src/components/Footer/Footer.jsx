@@ -6,11 +6,6 @@ import {
   FaLinkedinIn,
 } from 'react-icons/fa'
 
-const linkColumns = [
-  ['Home', 'Contact us'],
-  ['How it works', 'Privacy policy'],
-  ['Our mission', 'About'],
-]
 
 const socials = [
   { Icon: FaTwitter, label: 'Twitter' },
@@ -23,21 +18,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <nav className="footer-links">
-          {linkColumns.map((column, i) => (
-            <div className="footer-link-col" key={i}>
-              {column.map((label) => (
-                <a key={label} href="#" className="footer-link">
-                  {label}
-                </a>
-              ))}
-            </div>
-          ))}
-        </nav>
-
-        <button type="button" className="footer-cta">
-          Contact us
-        </button>
+      
       </div>
 
       <div className="footer-main">
@@ -53,8 +34,11 @@ function Footer() {
         </div>
 
         <div className="footer-end">
-          <hr className="footer-divider" />
+          <hr className="footer-divider" />        
           <div className="footer-socials">
+                <button type="button" className="footer-cta">
+          Contact us
+        </button>
             {socials.map(({ Icon, label }) => (
               <a
                 key={label}

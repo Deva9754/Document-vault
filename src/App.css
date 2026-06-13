@@ -540,6 +540,79 @@
     outline: none;
 }
 
+.search-results {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    max-height: 360px;
+    padding: 0.4rem;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md, 14px);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.search-empty {
+    padding: 0.75rem 0.85rem;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    border: none;
+    border-radius: 10px;
+    text-align: left;
+    background: transparent;
+    cursor: pointer;
+}
+
+.search-result:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.search-result-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    color: var(--button-primary);
+    background: rgba(124, 92, 255, 0.12);
+}
+
+.search-result-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.search-result-title {
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-primary);
+}
+
+.search-result-meta {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
 .header-actions {
     display: flex;
     align-items: center;
@@ -646,7 +719,7 @@
     min-width: 220px;
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
-    background: var(--glass-bg-light);
+    background: var(--glass-bg-dark);
     box-shadow: var(--shadow-lg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
@@ -698,10 +771,10 @@
 
 .page-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
 .upload-btn {
@@ -716,8 +789,8 @@
     color: var(--text-white);
     background: var(--button-primary);
     box-shadow: var(--shadow-sm);
-    cursor: pointer;
     transition: background 0.15s ease, transform 0.15s ease;
+    cursor: pointer;
 }
 
 .upload-btn:hover {
@@ -764,11 +837,11 @@
 
 .document-card-icon {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
     width: 42px;
     height: 42px;
-    flex-shrink: 0;
     border-radius: var(--radius-sm);
     font-size: 1.2rem;
     color: var(--button-primary);
@@ -781,13 +854,13 @@
 }
 
 .document-card-title {
+    overflow: hidden;
     margin: 0;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-primary);
 }
 
 .document-card-meta {
@@ -798,28 +871,28 @@
 
 .document-card-actions {
     display: flex;
-    gap: 0.35rem;
     flex-shrink: 0;
+    gap: 0.35rem;
 }
 
 .document-card-btn {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 32px;
     height: 32px;
     border: none;
     border-radius: var(--radius-sm);
+    text-decoration: none;
     color: var(--text-secondary);
     background: transparent;
-    text-decoration: none;
-    cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
+    cursor: pointer;
 }
 
 .document-card-btn:hover {
-    background: rgba(0, 0, 0, 0.06);
     color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .document-card-btn.danger:hover {
@@ -829,13 +902,14 @@
 
 
 /* Hamburger + drawer helpers (hidden on desktop) */
+
 .header-menu-btn {
     display: none;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
     width: 40px;
     height: 40px;
-    flex-shrink: 0;
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     font-size: 1.25rem;
@@ -846,13 +920,13 @@
 
 .sidebar-close-btn {
     display: none;
-    align-items: center;
     justify-content: center;
-    margin-left: auto;
+    align-items: center;
     width: 32px;
     height: 32px;
     border: none;
     border-radius: var(--radius-sm);
+    margin-left: auto;
     font-size: 1.2rem;
     color: var(--text-white);
     background: transparent;
@@ -863,6 +937,7 @@
     display: none;
 }
 
+
 /* Responsive */
 
 @media (max-width: 768px) {
@@ -870,79 +945,64 @@
     .sidebar {
         position: fixed;
         top: 0;
-        left: 0;
         bottom: 0;
-        width: min(82vw, 300px);
+        left: 0;
         z-index: 1200;
-        transform: translateX(-100%);
-        transition: transform 0.25s ease;
         overflow-y: auto;
+        width: min(82vw, 300px);
+        transition: transform 0.25s ease;
+        transform: translateX(-100%);
     }
-
     .sidebar.mobile-open {
         transform: translateX(0);
     }
-
     /* Keep full labels in the mobile drawer even if "collapsed" was toggled */
     .sidebar.collapsed {
         width: min(82vw, 300px);
     }
-
     .sidebar-brand-text {
         display: inline;
     }
-
     .sidebar-close-btn {
         display: inline-flex;
     }
-
     /* Hide the desktop collapse control on mobile */
     .sidebar-collapse-btn {
         display: none;
     }
-
     .sidebar-overlay {
-        display: block;
         position: fixed;
-        inset: 0;
         z-index: 1100;
+        display: block;
         background: rgba(0, 0, 0, 0.45);
+        inset: 0;
     }
-
     .header-menu-btn {
         display: inline-flex;
     }
-
     .header {
         gap: 0.75rem;
         padding: 0.75rem 1rem;
     }
-
     .header-profile-name {
         display: none;
     }
-
     .app-content {
         padding: 1rem;
     }
-
     .page {
         padding: var(--spacing-lg);
     }
-
     .page-header {
         flex-direction: column;
         align-items: stretch;
     }
-
     .upload-btn {
         justify-content: center;
     }
-
     .document-grid {
         grid-template-columns: 1fr;
     }
-
     .footer {
         padding: var(--spacing-lg) 1.25rem;
     }
@@ -1015,8 +1075,8 @@
     transform: translateY(-1px);
 }
 
-/* Bottom: brand on the left, divider + socials on the right */
-.footer-main {
+brand on the left,
+divider+socials on the right .footer-main {
     display: flex;
     align-items: center;
     gap: var(--spacing-xl);

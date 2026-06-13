@@ -5,7 +5,7 @@ import { subscribeDocuments, deleteDocument } from '../../services/documents'
 import UploadDialog from '../../components/UploadDialog/UploadDialog'
 import DocumentCard from '../../components/DocumentCard/DocumentCard'
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog'
-
+import { Box, CircularProgress, Typography } from '@mui/material'
 function CategoryPage({ title, group, category, showAll = false }) {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [documents, setDocuments] = useState([])
@@ -66,7 +66,21 @@ function CategoryPage({ title, group, category, showAll = false }) {
 
       <section className="recent-section">
         {loading ? (
-          <p className="recent-empty">Loading documents…</p>
+        <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      py: 6,
+      gap: 2,
+    }}
+  >
+    <CircularProgress size={50} />
+    <Typography variant="body2" color="text.secondary">
+      Loading documents...
+    </Typography>
+  </Box>
         ) : documents.length === 0 ? (
           <p className="recent-empty">
             No documents in {title} yet. Click “Upload to {title}” to add one.
