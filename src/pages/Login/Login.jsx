@@ -73,9 +73,6 @@ function Login() {
               <FiShield />
               <span>Document Vault</span>
             </span>
-            <a href="#" className="login-back">
-              Back to website <FiArrowRight />
-            </a>
           </div>
 
           <div className="login-visual-bottom">

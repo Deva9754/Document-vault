@@ -21,10 +21,14 @@ function Dashboard() {
     const uid = auth.currentUser?.uid
     if (!uid) return
 
-    const unsubscribe = subscribeRecentDocuments(uid, (docs) => {
-      setDocuments(docs)
-      setLoading(false)
-    })
+    const unsubscribe = subscribeRecentDocuments(
+      uid,
+      (docs) => {
+        setDocuments(docs)
+        setLoading(false)
+      },
+      3
+    )
 
     return unsubscribe
   }, [])
