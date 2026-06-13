@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FiChevronDown, FiChevronLeft } from 'react-icons/fi'
+import { FiChevronDown, FiChevronLeft, FiX } from 'react-icons/fi'
 import { mainNav, navGroups, bottomNav } from '../../config/nav'
 
 function NavItem({ item, collapsed }) {
@@ -65,14 +65,30 @@ function NavGroup({ item, collapsed }) {
   )
 }
 
-function Sidebar() {
+function Sidebar({ mobileOpen = false, onClose }) {
   const [collapsed, setCollapsed] = useState(false)
 
+  const classes = [
+    'sidebar',
+    collapsed ? 'collapsed' : '',
+    mobileOpen ? 'mobile-open' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <aside className={collapsed ? 'sidebar collapsed' : 'sidebar'}>
+    <aside className={classes}>
       <div className="sidebar-brand">
         <span className="sidebar-brand-mark">DV</span>
         {!collapsed && <span className="sidebar-brand-text">Document Vault</span>}
+        <button
+          type="button"
+          className="sidebar-close-btn"
+          onClick={onClose}
+          aria-label="Close menu"
+        >
+          <FiX />
+        </button>
       </div>
 
       <nav className="sidebar-nav">

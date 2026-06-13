@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../services/firebase'
-import { FiSearch, FiBell, FiChevronDown } from 'react-icons/fi'
+import { FiSearch, FiBell, FiChevronDown, FiMenu } from 'react-icons/fi'
 
 function getInitials(value) {
   if (!value) return 'U'
   return value.charAt(0).toUpperCase()
 }
 
-function Header() {
+function Header({ onMenuClick }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const user = auth.currentUser
   const displayName = user?.displayName || user?.email || 'User'
@@ -19,6 +19,15 @@ function Header() {
 
   return (
     <header className="header">
+      <button
+        type="button"
+        className="header-menu-btn"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        <FiMenu />
+      </button>
+
       <div className="header-search">
         <FiSearch className="header-search-icon" />
         <input type="search" placeholder="Search documents..." />
