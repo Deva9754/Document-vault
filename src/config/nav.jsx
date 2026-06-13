@@ -53,8 +53,8 @@ export const navGroups = [
         icon: FiFileText,
       },
       {
-        label: 'Transactions',
-        path: '/finance/transactions',
+        label: 'Registry',
+        path: '/finance/Registry',
         icon: FiRepeat,
       },
     ],

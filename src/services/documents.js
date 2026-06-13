@@ -5,6 +5,7 @@ import {
   doc,
   query,
   where,
+  getDocs,
   onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore'
@@ -121,4 +122,18 @@ export function subscribeRecentDocuments(uid, callback, max = 12) {
 // requires a signed/admin request from a backend, so the file stays in Cloudinary.
 export async function deleteDocument(docItem) {
   await deleteDoc(doc(db, DOCS_COLLECTION, docItem.id))
+}
+
+// Deletes every document for a user that belongs to a given category
+// (e.g. all documents tagged with a family member's name). Returns the count.
+export async function deleteDocumentsByCategory(uid, category) {
+  if (!uid || !category) return 0
+  const q = query(
+    collection(db, DOCS_COLLECTION),
+    where('uid', '==', uid),
+    where('category', '==', category)
+  )
+  const snapshot = await getDocs(q)
+  await Promise.all(snapshot.docs.map((d) => deleteDoc(d.ref)))
+  return snapshot.size
 }

@@ -7,20 +7,25 @@ import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Settings from './pages/Settings/Settings'
 import CategoryPage from './pages/CategoryPage/CategoryPage'
+import FamilyMemberPage from './pages/CategoryPage/FamilyMemberPage'
 import ProtectedRoute from './routes/ProtectedRoute'
 import { navGroups } from './config/nav'
 import './App.css'
 
-const categoryRoutes = navGroups.flatMap((group) =>
-  group.children.map((child) => ({
-    path: child.path,
-    title: child.label,
-    group: group.label,
-    // "All Documents" lists everything; others filter by their label.
-    showAll: child.path === '/documents',
-    category: child.label,
-  }))
-)
+// Family members are dynamic (managed in FamilyContext), so they are routed
+// separately via /family/:slug instead of being generated from the static nav.
+const categoryRoutes = navGroups
+  .filter((group) => group.label !== 'Family')
+  .flatMap((group) =>
+    group.children.map((child) => ({
+      path: child.path,
+      title: child.label,
+      group: group.label,
+      // "All Documents" lists everything; others filter by their label.
+      showAll: child.path === '/documents',
+      category: child.label,
+    }))
+  )
 
 function App() {
   const [user, setUser] = useState(null)
@@ -69,6 +74,7 @@ function App() {
               }
             />
           ))}
+          <Route path="/family/:slug" element={<FamilyMemberPage />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
 

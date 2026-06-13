@@ -7,11 +7,21 @@ import {
 } from 'react-icons/fa'
 
 
+const CONTACT_EMAIL = 'devashishsahu01@gmail.com'
+
 const socials = [
-  { Icon: FaTwitter, label: 'Twitter' },
-  { Icon: FaInstagram, label: 'Instagram' },
-  { Icon: FaFacebookF, label: 'Facebook' },
-  { Icon: FaLinkedinIn, label: 'LinkedIn' },
+  { Icon: FaTwitter, label: 'Twitter', href: '#' },
+  {
+    Icon: FaInstagram,
+    label: 'Instagram',
+    href: 'https://www.instagram.com/devashish_2_/',
+  },
+  { Icon: FaFacebookF, label: 'Facebook', href: '#' },
+  {
+    Icon: FaLinkedinIn,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/devashish-sahu-a509401b3/',
+  },
 ]
 
 function Footer() {
@@ -36,15 +46,23 @@ function Footer() {
         <div className="footer-end">
           <hr className="footer-divider" />        
           <div className="footer-socials">
-                <button type="button" className="footer-cta">
-          Contact us
-        </button>
-            {socials.map(({ Icon, label }) => (
+            <a
+              href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                'Document Vault — Contact'
+              )}`}
+              className="footer-cta"
+            >
+              Contact us
+            </a>
+            {socials.map(({ Icon, label, href }) => (
               <a
                 key={label}
-                href="#"
+                href={href}
                 aria-label={label}
                 className="footer-social"
+                {...(href !== '#'
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
               >
                 <Icon />
               </a>
