@@ -54,14 +54,16 @@ function CategoryPage({ title, group, category, showAll = false }) {
               : `Documents in ${title}.`}
           </p>
         </div>
-        {/* <button
-          type="button"
-          className="upload-btn"
-          onClick={() => setDialogOpen(true)}
-        >
-          <FiUploadCloud />
-          Upload to {title}
-        </button> */}
+        {!showAll && (
+          <button
+            type="button"
+            className="upload-btn"
+            onClick={() => setDialogOpen(true)}
+          >
+            <FiUploadCloud />
+            Upload to {title}
+          </button>
+        )}
       </div>
 
       <section className="recent-section">
